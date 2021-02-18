@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Board from '../Board/Board';
 import initializeDeck from '../../deck';
 
-function Main() {
+const Main = () => {
   const [cards, setCards] = useState([]);
   const [flipped, setFlipped] = useState([]);
   const [dimension, setDimension] = useState(480);
@@ -71,7 +71,7 @@ function Main() {
   // };
 
   return (
-    <div>
+    <>
       <Board
         dimension={dimension}
         cards={cards}
@@ -80,7 +80,7 @@ function Main() {
         disabled={disabled}
         solved={solved}
       />
-    </div>
+    </>
   );
 }
 
