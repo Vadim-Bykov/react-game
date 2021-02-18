@@ -30,7 +30,7 @@ const Main = () => {
   const handleClick = (id) => {
     setDisabled(true);
 
-    if(flipped.length === 0){
+    if (flipped.length === 0) {
       setFlipped([id]);
       setDisabled(false);
     } else {
@@ -82,6 +82,6 @@ const Main = () => {
       />
     </>
   );
-}
+};
 
 export default Main;

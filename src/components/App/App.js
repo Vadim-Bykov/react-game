@@ -8,6 +8,7 @@ import store from '../../redux/store';
 // import Board from '../Board/Board';
 // import initializeDeck from '../../deck';
 import Main from '../Main/Main';
+import MainContainer from '../Main/MainContainer';
 
 function App() {
   // const [cards, setCards] = useState([]);
@@ -25,11 +26,6 @@ function App() {
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Header />
         <Main />
-        {/* <Board
-          cards={cards}
-          flipped={flipped}
-          handleClick={handleClick}
-        /> */}
       </BrowserRouter>
     </Provider>
   );
