@@ -13,7 +13,7 @@ const Card = ({id, type, width, height, flipped, handleClick, disabled, solved})
          <div className='flipper'>
             <img
                style={{ width, height }}
-               className={flipped ? 'front' : back}
+               className={flipped ? 'front' : 'back'}
                src={flipped || solved ? type : back}
                alt="card" />
          </div>
