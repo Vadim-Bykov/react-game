@@ -5,15 +5,16 @@ const MAIN_SET_FLIPPED = 'MAIN_SET_FLIPPED';
 const MAIN_SET_DIMENSION = 'MAIN_SET_DIMENSION';
 const MAIN_SET_SOLVED = 'MAIN_SET_SOLVED';
 const MAIN_SET_DISABLED = 'MAIN_SET_DISABLED';
+const MAIN_SET_COUNT_PAIRS = 'MAIN_SET_COUNT_PAIRS';
 const MAIN_RESET_STATE = 'MAIN_RESET_STATE';
 
 const initialState = {
-  cards: initializeDeck(),
+  cards: [],
   flipped: [],
   dimension: 480,
   solved: [],
   disabled: false,
-  countPairs: 5,
+  countPairs: 6,
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -58,6 +59,12 @@ const mainReducer = (state = initialState, action) => {
         disabled: action.boolean,
       };
 
+    case MAIN_SET_COUNT_PAIRS:
+      return {
+        ...state,
+        countPairs: action.count,
+      };
+
     default:
       return state;
   }
@@ -72,6 +79,7 @@ export const setFlipped = (array) => ({ type: MAIN_SET_FLIPPED, array });
 export const setDimension = (value) => ({ type: MAIN_SET_DIMENSION, value });
 export const setSolved = (array) => ({ type: MAIN_SET_SOLVED, array });
 export const setDisabled = (boolean) => ({ type: MAIN_SET_DISABLED, boolean });
+export const setCountPairs = (count) => ({ type: MAIN_SET_COUNT_PAIRS, count });
 
 export const resizeBoard = () => (dispatch) => {
   dispatch(
@@ -96,18 +104,20 @@ export const handleClick = (id) => (dispatch, getState) => {
   const solved = getState().main.solved;
   const sameCardClicked = flipped.includes(id);
   dispatch(setDisabled(true));
-
   if (flipped.length === 0) {
     dispatch(setFlipped([id]));
     dispatch(setDisabled(false));
   } else {
-    if (sameCardClicked) return;
+    if (sameCardClicked) {
+      dispatch(setDisabled(false));
+      return;
+    }
     dispatch(setFlipped([flipped[0], id]));
     if (isMatch(id, cards, flipped)) {
       dispatch(setSolved([...solved, flipped[0], id]));
-      resetCards(dispatch);
+      resetFlippedCards(dispatch);
     } else {
-      setTimeout(() => resetCards(dispatch), 1000);
+      setTimeout(() => resetFlippedCards(dispatch), 1000);
     }
   }
 };
@@ -120,18 +130,19 @@ const isMatch = (id, cards, flipped) => {
   return flippedCard.type === clickedCard.type;
 };
 
-const resetCards = (dispatch) => {
+const resetFlippedCards = (dispatch) => {
   dispatch(setFlipped([]));
   dispatch(setDisabled(false));
 };
 
-export const setCountPairs = (count) => (dispatch) => {
-  const cardsArray = initializeDeck(count);
-  dispatch(setCards(cardsArray));
+export const setNewCountPairs = (count) => (dispatch) => {
+  dispatch(setCountPairs(count));
+  dispatch(showAllCards());
 };
 
-export const succeedGame = (count) => (dispatch) => {
-  dispatch(resetState(count))
-}
+export const finishGame = (count) => (dispatch) => {
+  dispatch(resetState(count));
+  setTimeout(dispatch(showAllCards()));
+};
 
 export default mainReducer;

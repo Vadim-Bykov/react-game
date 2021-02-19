@@ -15,7 +15,7 @@ export default function initializeDeck(countPair = 6) {
   let id = 0;
   // const cards = ['angular', 'aurelia', 'backbone', 'ember', 'react', 'vue']
   const cards = shuffle([angular, aurelia, backbone, ember, react, vue, logo])
-    .slice(0, countPair + 1)
+    .slice(0, countPair)
     .reduce((acc, type) => {
       acc.push({ id: id++, type });
       acc.push({ id: id++, type });
