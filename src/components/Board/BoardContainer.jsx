@@ -3,19 +3,20 @@ import React, { useEffect } from 'react';
 import { handleClick, resizeBoard, showAllCards, finishGame, setCards } from '../../redux/mainReducer';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
-import { getCards, getCountPairs, getDimension, getDisabled, getFlipped, getSolved } from '../../selectors/boardSelector';
+import { getCards, getCountPairs, getDimension, getDisabled, getFlipped, getGameInProgress, getSolved } from '../../selectors/mainSelector';
 import initializeDeck from '../../deck';
 import Board from './Board';
 // import Card from '../Card/Card';
 
 
-const BoardContainer = ({ resizeBoard, handleClick, showAllCards, finishGame, cards, flipped, dimension, disabled, solved, setCards,countPairs }) => {
+const BoardContainer = ({ resizeBoard, handleClick, showAllCards, finishGame, cards, flipped, dimension, disabled, solved, setCards, countPairs, gameInProgress }) => {
 
   useEffect(() => {
     const cardsArray = initializeDeck(countPairs);
     if (!cards.length) {
       setCards(cardsArray)
     } else {
+      if (gameInProgress) return;
       setCards(cardsArray)
     };
   }, [countPairs]);
@@ -57,6 +58,7 @@ BoardContainer.propTypes = {
   disabled: PropTypes.bool.isRequired,
   solved: PropTypes.arrayOf(PropTypes.number),
   countPairs: PropTypes.number.isRequired,
+  gameInProgress: PropTypes.bool.isRequired,
   handleClick: PropTypes.func.isRequired,
   resizeBoard: PropTypes.func.isRequired,
   showAllCards: PropTypes.func.isRequired,
@@ -71,6 +73,7 @@ const mapStateToProps = (state) => ({
   disabled: getDisabled(state),
   solved: getSolved(state),
   countPairs: getCountPairs(state),
+  gameInProgress: getGameInProgress(state),
 });
 
 const mapDispatchToProps = {

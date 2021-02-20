@@ -5,8 +5,9 @@ const MAIN_SET_FLIPPED = 'MAIN_SET_FLIPPED';
 const MAIN_SET_DIMENSION = 'MAIN_SET_DIMENSION';
 const MAIN_SET_SOLVED = 'MAIN_SET_SOLVED';
 const MAIN_SET_DISABLED = 'MAIN_SET_DISABLED';
-const MAIN_SET_COUNT_PAIRS = 'MAIN_SET_COUNT_PAIRS';
+// const MAIN_SET_COUNT_PAIRS = 'MAIN_SET_COUNT_PAIRS';
 const MAIN_RESET_STATE = 'MAIN_RESET_STATE';
+const MAIN_SET_GAME_IN_PROGRESS = 'MAIN_SET_GAME_IN_PROGRESS';
 
 const initialState = {
   cards: [],
@@ -15,55 +16,92 @@ const initialState = {
   solved: [],
   disabled: false,
   countPairs: 6,
+  gameInProgress: false,
 };
 
-const mainReducer = (state = initialState, action) => {
+const getInitialState = () => {
+  let state;
+  const localState = JSON.parse(localStorage.getItem('state'));
+  if (localState) {
+    state = localState;
+  } else {
+    localStorage.setItem('state', JSON.stringify(initialState));
+    state = initialState;
+  }
+
+  return state;
+};
+
+const mainReducer = (state = getInitialState(), action) => {
+  let newState;
   switch (action.type) {
     case MAIN_RESET_STATE:
-      return {
+      newState = {
         ...state,
         cards: initializeDeck(action.countPairs),
         flipped: [],
         dimension: 480,
         solved: [],
         disabled: false,
+        countPairs: action.countPairs,
+        gameInProgress: false,
       };
+      localStorage.setItem('state', JSON.stringify(newState));
+      return newState;
 
     case MAIN_SET_CARDS:
-      return {
+      newState = {
         ...state,
         cards: [...action.cards],
       };
+      localStorage.setItem('state', JSON.stringify(newState));
+      return newState;
 
     case MAIN_SET_FLIPPED:
-      return {
+      newState = {
         ...state,
         flipped: [...action.array],
       };
+      localStorage.setItem('state', JSON.stringify(newState));
+      return newState;
 
     case MAIN_SET_DIMENSION:
-      return {
+      newState = {
         ...state,
         dimension: action.value,
       };
+      localStorage.setItem('state', JSON.stringify(newState));
+      return newState;
 
     case MAIN_SET_SOLVED:
-      return {
+      newState = {
         ...state,
         solved: [...action.array],
       };
+      localStorage.setItem('state', JSON.stringify(newState));
+      return newState;
 
     case MAIN_SET_DISABLED:
-      return {
+      newState = {
         ...state,
         disabled: action.boolean,
       };
+      localStorage.setItem('state', JSON.stringify(newState));
+      return newState;
 
-    case MAIN_SET_COUNT_PAIRS:
+    // case MAIN_SET_COUNT_PAIRS:
+    //   newState = {
+    //     ...state,
+    //     countPairs: action.count,
+    //   };
+    //   localStorage.setItem('state', JSON.stringify(newState));
+    //   return newState;
+
+    case MAIN_SET_GAME_IN_PROGRESS:
       return {
         ...state,
-        countPairs: action.count,
-      };
+        gameInProgress: action.boolean
+      }
 
     default:
       return state;
@@ -79,7 +117,8 @@ export const setFlipped = (array) => ({ type: MAIN_SET_FLIPPED, array });
 export const setDimension = (value) => ({ type: MAIN_SET_DIMENSION, value });
 export const setSolved = (array) => ({ type: MAIN_SET_SOLVED, array });
 export const setDisabled = (boolean) => ({ type: MAIN_SET_DISABLED, boolean });
-export const setCountPairs = (count) => ({ type: MAIN_SET_COUNT_PAIRS, count });
+// export const setCountPairs = (count) => ({ type: MAIN_SET_COUNT_PAIRS, count });
+export const setGameInProgress = (boolean) => ({ type: MAIN_SET_GAME_IN_PROGRESS, boolean });
 
 export const resizeBoard = () => (dispatch) => {
   dispatch(
@@ -103,7 +142,10 @@ export const handleClick = (id) => (dispatch, getState) => {
   const flipped = getState().main.flipped;
   const solved = getState().main.solved;
   const sameCardClicked = flipped.includes(id);
+
   dispatch(setDisabled(true));
+  dispatch(setGameInProgress(true));
+
   if (flipped.length === 0) {
     dispatch(setFlipped([id]));
     dispatch(setDisabled(false));
@@ -133,15 +175,16 @@ const isMatch = (id, cards, flipped) => {
 const resetFlippedCards = (dispatch) => {
   dispatch(setFlipped([]));
   dispatch(setDisabled(false));
+  dispatch(setGameInProgress(false));
 };
 
-export const setNewCountPairs = (count) => (dispatch) => {
-  dispatch(setCountPairs(count));
+export const setNewCountPairs = (countPairs) => (dispatch) => {
+  dispatch(resetState(countPairs));
   dispatch(showAllCards());
 };
 
-export const finishGame = (count) => (dispatch) => {
-  dispatch(resetState(count));
+export const finishGame = (countPairs) => (dispatch) => {
+  dispatch(resetState(countPairs));
   setTimeout(dispatch(showAllCards()));
 };
 
