@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { resetState, setNewCountPairs } from '../../redux/mainReducer';
-import style from './ChangeSize.module.css';
+import style from './ChangeSize.module.scss';
 import PropTypes from "prop-types";
-import { getCountPairs } from '../../selectors/mainSelector';
+import { getCountPairs } from '../../selectors/mainSelectors';
 
 const ChangeSize = ({setNewCountPairs, resetState, countPairs}) => {
 
@@ -12,17 +12,22 @@ const ChangeSize = ({setNewCountPairs, resetState, countPairs}) => {
    
    return (
       <div className={style.changeSizeBlock}>
-         <span>Change board size </span>
-         <select name="ch" id="size" value={countPairs} onChange={onChangeSelect} >
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
-         </select>
-         <button onClick={() => resetState(countPairs)}>New game</button>
+         <div>
+            <span>Change board size </span>
+            <select name="ch" id="size" value={countPairs} onChange={onChangeSelect} >
+               <option>1</option>
+               <option>2</option>
+               <option>3</option>
+               <option>4</option>
+               <option>5</option>
+               <option>6</option>
+               <option>7</option>
+            </select>
+         </div>
+         <div>
+            <span>You can start new game</span>
+            <button onClick={() => resetState(countPairs)}>New game</button>
+         </div>
       </div>
    );
 };

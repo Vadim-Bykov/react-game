@@ -1,4 +1,4 @@
-import './Card.css';
+import './Card.scss';
 import PropTypes from "prop-types";
 import back from '../../img/js-badge.svg';
 // import front from '../../img/react.svg';

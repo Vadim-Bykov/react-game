@@ -1,9 +1,0 @@
-.main{
-   display: grid;
-   grid-gap: 20px;
-   justify-items: center;
-}
-
-.btn{
-   width: 30%;
-}

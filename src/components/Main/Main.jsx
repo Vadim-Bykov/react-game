@@ -1,15 +1,13 @@
 import React from 'react';
 import BoardContainer from '../Board/BoardContainer';
-import style from './Main.module.css';
-import ChangeSize from '../ChangeSize/ChangeSize';
+import style from './Main.module.scss';
 
 
-const Main = ({setCountPairs}) => {
+const Main = () => {
   
   return (
     <main className={style.main}>
       <BoardContainer />
-      <ChangeSize />
     </main>
   );
 };

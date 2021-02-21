@@ -1,0 +1,10 @@
+.changeSizeBlock{
+   padding: 10px 20px;
+   display: grid;
+   grid-gap: 20px;
+
+   div{
+      display: flex;
+      justify-content: space-between;
+   }
+}

@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { handleClick, resizeBoard, showAllCards, finishGame, setCards } from '../../redux/mainReducer';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
-import { getCards, getCountPairs, getDimension, getDisabled, getFlipped, getGameInProgress, getSolved } from '../../selectors/mainSelector';
+import { getCards, getCountPairs, getDimension, getDisabled, getFlipped, getGameInProgress, getSolved } from '../../selectors/mainSelectors';
 import initializeDeck from '../../deck';
 import Board from './Board';
 // import Card from '../Card/Card';
