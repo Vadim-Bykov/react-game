@@ -9,12 +9,12 @@ const Footer = () => {
             <div className={style.footer}>
                <span>2020 </span>
                <span className={style.logoRS}>
-                  <a href="https://rs.school/js" target="_blank" title="Курс «JavaScript/Front-end»"><img
+                  <a href="https://rs.school/js" target="_blank" title="Курс «JavaScript/Front-end»" rel="noreferrer"><img
                      src={logoRS} alt="logo" width="50" /></a>
                </span>
                <img src={logoGitHub} alt="github" width="20" />
                <span>
-                  <a href="https://github.com/Vadim-Bykov" target="_blank" title="github.com/Vadim-Bykov">Vadim-Bykov</a>
+                  <a href="https://github.com/Vadim-Bykov" target="_blank" title="github.com/Vadim-Bykov" rel="noreferrer">Vadim-Bykov</a>
                </span>
             </div>
          </div>

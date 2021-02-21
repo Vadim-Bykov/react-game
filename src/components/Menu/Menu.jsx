@@ -13,13 +13,18 @@ const Menu = ({ isActive, toggleIsActive }) => {
          setTimeout(() => setHide(() => false), 150);
       };
    }, [isActive]);
+   
+   const toggleClass = {
+      [style.open]: isActive,
+      [style.hide]: hide
+   };
 
    return (
       <>
-         <div className={cn(style.overlay, { [style.open]: isActive, [style.hide]: hide })}
+         <div className={cn(style.overlay, toggleClass)}
             onClick={toggleIsActive} />
          
-         <div className={cn(style.baseMenu, {[style.open]: isActive, [style.hide]: hide})}>
+         <div className={cn(style.baseMenu, toggleClass)}>
             <div className={style.headerBlock}>
                <h3 className={style.headerCaption}>Menu</h3>
             </div>
