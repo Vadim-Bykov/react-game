@@ -100,8 +100,8 @@ const mainReducer = (state = getInitialState(), action) => {
     case MAIN_SET_GAME_IN_PROGRESS:
       return {
         ...state,
-        gameInProgress: action.boolean
-      }
+        gameInProgress: action.boolean,
+      };
 
     default:
       return state;
@@ -118,7 +118,10 @@ export const setDimension = (value) => ({ type: MAIN_SET_DIMENSION, value });
 export const setSolved = (array) => ({ type: MAIN_SET_SOLVED, array });
 export const setDisabled = (boolean) => ({ type: MAIN_SET_DISABLED, boolean });
 // export const setCountPairs = (count) => ({ type: MAIN_SET_COUNT_PAIRS, count });
-export const setGameInProgress = (boolean) => ({ type: MAIN_SET_GAME_IN_PROGRESS, boolean });
+export const setGameInProgress = (boolean) => ({
+  type: MAIN_SET_GAME_IN_PROGRESS,
+  boolean,
+});
 
 export const resizeBoard = () => (dispatch) => {
   dispatch(
@@ -137,7 +140,7 @@ export const showAllCards = () => (dispatch, getState) => {
   setTimeout(() => dispatch(setFlipped([])), 3000);
 };
 
-export const handleClick = (id) => (dispatch, getState) => {
+export const handleClick = (id, soundSuccess, soundError) => (dispatch, getState) => {
   const cards = getState().main.cards;
   const flipped = getState().main.flipped;
   const solved = getState().main.solved;
@@ -158,8 +161,10 @@ export const handleClick = (id) => (dispatch, getState) => {
     if (isMatch(id, cards, flipped)) {
       dispatch(setSolved([...solved, flipped[0], id]));
       resetFlippedCards(dispatch);
+      soundSuccess.current.play();
     } else {
       setTimeout(() => resetFlippedCards(dispatch), 1000);
+      soundError.current.play();
     }
   }
 };

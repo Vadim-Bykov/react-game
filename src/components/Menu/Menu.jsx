@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import PropTypes from "prop-types";
 import ChangeSize from '../ChangeSize/ChangeSize';
 import Music from '../Music/Music';
-// import MultiPlayer from '../Music/Music';
 
 const Menu = ({ isActive, toggleIsActive }) => {
    const [hide, setHide] = useState(false);
@@ -34,15 +33,7 @@ const Menu = ({ isActive, toggleIsActive }) => {
 
                <ChangeSize />
 
-              <Music/>
-
-               {/* <MultiPlayer
-                  urls={[
-                     'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-                     'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-                     'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
-                  ]}
-               /> */}
+               <Music />
                
             </div>
          </div>

@@ -1,14 +1,19 @@
 import './Card.scss';
 import PropTypes from "prop-types";
 import back from '../../img/js-badge.svg';
-// import front from '../../img/react.svg';
+import soundSuccess from '../../assets/sound/success.mp3';
+import soundError from '../../assets/sound/error.mp3';
+import { createRef } from 'react';
 
-const Card = ({id, type, width, height, flipped, handleClick, disabled, solved}) => {
+const Card = ({ id, type, width, height, flipped, handleClick, disabled, solved }) => {
+   const refSoundSuccess = createRef();
+   const refSoundError = createRef();
+
    return (
       <div
          className={`flip-container ${flipped ? 'flipped' : ''}`}
          style={{ width, height }}
-         onClick={() => disabled ? null : handleClick(id)}
+         onClick={() => disabled ? null : handleClick(id, refSoundSuccess, refSoundError)}
       >
          <div className='flipper'>
             <img
@@ -17,6 +22,8 @@ const Card = ({id, type, width, height, flipped, handleClick, disabled, solved})
                src={flipped || solved ? type : back}
                alt="card" />
          </div>
+         <audio ref={refSoundSuccess} src={soundSuccess} />
+         <audio ref={refSoundError} src={soundError} />
       </div>
    );
 }
