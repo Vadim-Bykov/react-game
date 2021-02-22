@@ -10,8 +10,8 @@ const Board = ({cards, flipped, handleClick, dimension, disabled, solved}) => {
                key={card.id}
                id={card.id}
                type={card.type}
-               width={dimension / 4.2}
-               height={dimension / 4.2}
+               width={dimension / 4.5}
+               height={dimension / 4.5}
                flipped={flipped.includes(card.id)}
                handleClick={handleClick}
                disabled={disabled || solved.includes(card.id)}

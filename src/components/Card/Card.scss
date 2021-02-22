@@ -1,12 +1,12 @@
 .flip-container{
-   perspective: 1000px;
-   display: inline-block;
+   // perspective: 1000px;
+   // display: inline-block;
    border: 1px solid white;
    background: rgb(182, 143, 143);
    margin: 5px;
 
    &:hover{
-      transition: all .1s ease-in-out;
+      transition: all .15s ease-in-out;
       cursor: pointer;
       box-shadow: inset 0px 0px 15px 0px rgba(50, 50, 50, 0.75);
    }
@@ -28,6 +28,7 @@
    position: absolute;
    left: 0;
    top: 0;
+   padding: 5px;
 }
 
 .back{
