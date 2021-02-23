@@ -1,14 +1,14 @@
 import style from './Music.module.scss';
+import PropTypes from "prop-types";
 // import cn from "classnames";
 // import PropTypes from "prop-types";
 // import useSound from 'use-sound';
 import React, { useEffect, useState } from 'react';
 import Switch from '../Switch/Switch';
 
-const Music = () => {
+const Music = ({isMusicActive, toggleIsMusic}) => {
 
    const [value, setValue] = useState(50);
-   const [play, setPlay] = useState(false);
 
    const refAudio = React.createRef();
 
@@ -22,8 +22,8 @@ const Music = () => {
    }
 
    const onPlay = () => {
-      setPlay((play) => !play);
-      if (!play) {
+      toggleIsMusic((play) => !play);
+      if (!isMusicActive) {
          refAudio.current.play()
       } else {
          refAudio.current.pause()
@@ -38,10 +38,15 @@ const Music = () => {
 
          <input onChange={onchangeVol} id="range" min="0" max="100" value={value} type="range" />
 
-         <Switch toggle={onPlay} />
+         <Switch toggle={onPlay} checked={isMusicActive} />
          
       </div>
    );
 };
+
+Music.propTypes = {
+   toggleIsMusic: PropTypes.func.isRequired,
+   isMusicActive: PropTypes.bool.isRequired
+}
 
 export default Music;

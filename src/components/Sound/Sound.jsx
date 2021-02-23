@@ -3,10 +3,8 @@ import PropTypes from "prop-types";
 // import useSound from 'use-sound';
 import React, { useEffect, useState } from 'react';
 import Switch from '../Switch/Switch';
-import { connect } from 'react-redux';
-import { setSoundVolume, toggleIsSound } from '../../redux/burgerReducer';
 
-const Sound = ({toggleIsSound, setSoundVolume}) => {
+const Sound = ({toggleIsSound, setSoundVolume, isSoundActive}) => {
 
    const [value, setValue] = useState(50);
 
@@ -26,7 +24,7 @@ const Sound = ({toggleIsSound, setSoundVolume}) => {
 
          <input onChange={onchangeVolume} id="range" min="0" max="100" value={value} type="range" />
 
-         <Switch toggle={toggleIsSound} />
+         <Switch toggle={toggleIsSound} checked={isSoundActive} />
          
       </div>
    );
@@ -35,15 +33,7 @@ const Sound = ({toggleIsSound, setSoundVolume}) => {
 Sound.propTypes = {
    setSoundVolume: PropTypes.func.isRequired,
    toggleIsSound: PropTypes.func.isRequired,
+   isSoundActive: PropTypes.bool.isRequired
 }
 
-// const mapStateToProps = (state) => ({
-//    isSoundActive: state.burger.isSoundActive,
-// });
-
-const mapDispatchToProps = {
-   setSoundVolume,
-   toggleIsSound,
-}
-
-export default connect(null, mapDispatchToProps)(Sound);
+export default Sound;

@@ -1,5 +1,5 @@
 // import './Board.css';
-import React, { useEffect } from 'react';
+import React, { createRef, useEffect } from 'react';
 import { handleClick, resizeBoard, showAllCards, finishGame, setCards } from '../../redux/mainReducer';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
@@ -7,9 +7,15 @@ import { getCards, getCountPairs, getDimension, getDisabled, getFlipped, getGame
 import initializeDeck from '../../deck';
 import Board from './Board';
 // import Card from '../Card/Card';
+import soundSuccess from '../../assets/sound/success.mp3';
+import soundError from '../../assets/sound/error.mp3';
+import { getCardsBG, getOpacityBG } from '../../selectors/burgerSelectors';
 
 
-const BoardContainer = ({ resizeBoard, handleClick, showAllCards, finishGame, cards, flipped, dimension, disabled, solved, setCards, countPairs, gameInProgress }) => {
+const BoardContainer = ({ resizeBoard, handleClick, showAllCards, finishGame, cards, flipped, dimension, disabled, solved, setCards, countPairs, gameInProgress, cardsBG, opacity }) => {
+
+  const refSoundSuccess = createRef();
+  const refSoundError = createRef();
 
   useEffect(() => {
     const cardsArray = initializeDeck(countPairs);
@@ -40,14 +46,22 @@ const BoardContainer = ({ resizeBoard, handleClick, showAllCards, finishGame, ca
   }, [solved]);
 
   return (
-    <Board
-      cards={cards}
-      dimension={dimension}
-      flipped={flipped}
-      handleClick={handleClick}
-      disabled={disabled}
-      solved={solved}
-    />
+    <>
+      <Board
+        cards={cards}
+        dimension={dimension}
+        flipped={flipped}
+        handleClick={handleClick}
+        disabled={disabled}
+        solved={solved}
+        refSoundSuccess={refSoundSuccess}
+        refSoundError={refSoundError}
+        cardsBG={cardsBG}
+        opacity={opacity}
+      />
+      <audio ref={refSoundSuccess} src={soundSuccess} />
+      <audio ref={refSoundError} src={soundError} />
+    </>
   );
 };
 
@@ -64,6 +78,8 @@ BoardContainer.propTypes = {
   showAllCards: PropTypes.func.isRequired,
   finishGame: PropTypes.func.isRequired,
   setCards: PropTypes.func.isRequired,
+  cardsBG: PropTypes.string.isRequired,
+  opacity: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -74,6 +90,9 @@ const mapStateToProps = (state) => ({
   solved: getSolved(state),
   countPairs: getCountPairs(state),
   gameInProgress: getGameInProgress(state),
+  cardsBG: getCardsBG(state),
+  opacity: getOpacityBG(state)
+
 });
 
 const mapDispatchToProps = {

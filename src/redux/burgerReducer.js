@@ -1,27 +1,33 @@
 const BURGER_TOGGLE_IS_MENU_ACTIVE = 'BURGER_TOGGLE_IS_MENU_ACTIVE';
 const BURGER_TOGGLE_SOUND = 'BURGER_TOGGLE_SOUND';
+const BURGER_TOGGLE_MUSIC = 'BURGER_TOGGLE_MUSIC';
 const BURGER_SET_SOUND_VOLUME = 'BURGER_SET_SOUND_VOLUME';
+const BURGER_SET_CARDS_BG = 'BURGER_SET_CARDS_BG';
+const BURGER_SET_OPACITY_BG = 'BURGER_SET_OPACITY_BG';
 
 const initialState = {
   isMenuActive: false,
-  isSoundActive: false,
+  isSoundActive: true,
+  isMusicActive: false,
   volume: 0.5,
+  cardsBG: '255,255,255',
+  opacity: 0,
 };
 
-// const getInitialState = () => {
-//   let state;
-//   const localState = JSON.parse(localStorage.getItem('burger'));
-//   if (localState) {
-//     state = localState;
-//   } else {
-//     localStorage.setItem('burger', JSON.stringify(initialState));
-//     state = initialState;
-//   }
+const getInitialState = () => {
+  let state;
+  const localState = JSON.parse(localStorage.getItem('burger'));
+  if (localState) {
+    state = localState;
+  } else {
+    localStorage.setItem('burger', JSON.stringify(initialState));
+    state = initialState;
+  }
 
-//   return state;
-// };
+  return state;
+};
 
-const burgerReducer = (state = initialState, action) => {
+const burgerReducer = (state = getInitialState(), action) => {
   let newState;
   switch (action.type) {
     case BURGER_TOGGLE_IS_MENU_ACTIVE:
@@ -29,6 +35,7 @@ const burgerReducer = (state = initialState, action) => {
         ...state,
         isMenuActive: !state.isMenuActive,
       };
+      localStorage.setItem('burger', JSON.stringify(newState));
       return newState;
 
     case BURGER_TOGGLE_SOUND:
@@ -36,16 +43,41 @@ const burgerReducer = (state = initialState, action) => {
         ...state,
         isSoundActive: !state.isSoundActive,
       };
-      // localStorage.setItem('burger', JSON.stringify(newState));
+      localStorage.setItem('burger', JSON.stringify(newState));
       return newState;
+    
+      case BURGER_TOGGLE_MUSIC:
+        newState = {
+          ...state,
+          isMusicActive: !state.isMusicActive,
+        };
+        localStorage.setItem('burger', JSON.stringify(newState));
+        return newState;
 
     case BURGER_SET_SOUND_VOLUME:
       newState = {
         ...state,
         volume: action.volume,
       };
-      // localStorage.setItem('burger', JSON.stringify(newState));
+      localStorage.setItem('burger', JSON.stringify(newState));
       return newState;
+    
+    case BURGER_SET_CARDS_BG:
+      newState = {
+        ...state,
+        cardsBG: action.color,
+      };
+      localStorage.setItem('burger', JSON.stringify(newState));
+      return newState;
+    
+    case BURGER_SET_OPACITY_BG:
+      newState = {
+        ...state,
+        opacity: action.opacity,
+      };
+      localStorage.setItem('burger', JSON.stringify(newState));
+      return newState;
+  
 
     default:
       return state;
@@ -56,8 +88,12 @@ export const toggleIsMenuActive = () => ({ type: BURGER_TOGGLE_IS_MENU_ACTIVE })
 
 export const toggleIsSound = () => ({ type: BURGER_TOGGLE_SOUND });
 
-export const setSoundVolume = (volume) => ({
-  type: BURGER_SET_SOUND_VOLUME, volume
-});
+export const toggleIsMusic = () => ({ type: BURGER_TOGGLE_MUSIC });
+
+export const setSoundVolume = (volume) => ({ type: BURGER_SET_SOUND_VOLUME, volume });
+
+export const setCardsBG = (color) => ({ type: BURGER_SET_CARDS_BG, color });
+
+export const setOpacityBG = (opacity) => ({ type: BURGER_SET_OPACITY_BG, opacity });
 
 export default burgerReducer;

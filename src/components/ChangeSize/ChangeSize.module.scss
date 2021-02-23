@@ -3,8 +3,19 @@
    display: grid;
    grid-gap: 20px;
 
+   select{
+      width: 100px;
+   }
+
    div{
       display: flex;
       justify-content: space-between;
+      align-items: center;
    }
+}
+
+.newGame{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
 }

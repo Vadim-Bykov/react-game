@@ -1,15 +1,10 @@
 import './Card.scss';
 import PropTypes from "prop-types";
 import back from '../../img/js-badge.svg';
-import soundSuccess from '../../assets/sound/success.mp3';
-import soundError from '../../assets/sound/error.mp3';
-import { createRef } from 'react';
 
-const Card = ({ id, type, width, height, flipped, handleClick, disabled, solved }) => {
-   const refSoundSuccess = createRef();
-   const refSoundError = createRef();
+const Card = ({ id, type, width, height, flipped, handleClick, disabled, solved, refSoundSuccess, refSoundError, cardsBG, opacity }) => {
 
-   const background = 'none';
+   const background = `rgba(${cardsBG}, ${opacity})`;
 
    return (
       <div
@@ -24,8 +19,6 @@ const Card = ({ id, type, width, height, flipped, handleClick, disabled, solved 
                src={flipped || solved ? type : back}
                alt="card" />
          </div>
-         <audio ref={refSoundSuccess} src={soundSuccess} />
-         <audio ref={refSoundError} src={soundError} />
       </div>
    );
 }
@@ -39,6 +32,10 @@ Card.propTypes = {
    handleClick: PropTypes.func.isRequired,
    disabled: PropTypes.bool.isRequired,
    solved: PropTypes.bool.isRequired,
+   refSoundSuccess: PropTypes.object.isRequired,
+   refSoundError: PropTypes.object.isRequired,
+   cardsBG: PropTypes.string.isRequired,
+   opacity: PropTypes.number.isRequired,
 }
 
 export default Card;

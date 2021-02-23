@@ -3,6 +3,7 @@ import { resetState, setNewCountPairs } from '../../redux/mainReducer';
 import style from './ChangeSize.module.scss';
 import PropTypes from "prop-types";
 import { getCountPairs } from '../../selectors/mainSelectors';
+import cn from "classnames";
 
 const ChangeSize = ({setNewCountPairs, resetState, countPairs}) => {
 
@@ -14,7 +15,7 @@ const ChangeSize = ({setNewCountPairs, resetState, countPairs}) => {
       <div className={style.changeSizeBlock}>
          <div>
             <span>Change board size </span>
-            <select name="ch" id="size" value={countPairs} onChange={onChangeSelect} >
+            <select className={cn("form-select", "form-select-lg", "mb-3")}  name="ch" id="size" value={countPairs} onChange={onChangeSelect} >
                <option>1</option>
                <option>2</option>
                <option>3</option>
@@ -24,9 +25,9 @@ const ChangeSize = ({setNewCountPairs, resetState, countPairs}) => {
                <option>7</option>
             </select>
          </div>
-         <div>
+         <div className={style.newGame}>
             <span>You can start new game</span>
-            <button onClick={() => resetState(countPairs)}>New game</button>
+            <button className='btn btn-secondary' onClick={() => resetState(countPairs)}>New game</button>
          </div>
       </div>
    );

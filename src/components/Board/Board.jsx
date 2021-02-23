@@ -2,7 +2,7 @@ import './Board.scss';
 import PropTypes from "prop-types";
 import Card from '../Card/Card';
 
-const Board = ({cards, flipped, handleClick, dimension, disabled, solved}) => {
+const Board = ({cards, flipped, handleClick, dimension, disabled, solved, refSoundSuccess, refSoundError, cardsBG, opacity}) => {
    return (
       <div className='board'>
          {cards.map((card) => (
@@ -16,6 +16,10 @@ const Board = ({cards, flipped, handleClick, dimension, disabled, solved}) => {
                handleClick={handleClick}
                disabled={disabled || solved.includes(card.id)}
                solved={solved.includes(card.id)}
+               refSoundSuccess={refSoundSuccess}
+               refSoundError={refSoundError}
+               cardsBG={cardsBG}
+               opacity={opacity}
             />
          ))}
       </div>
@@ -29,6 +33,10 @@ Board.propTypes = {
    dimension: PropTypes.number.isRequired,
    disabled: PropTypes.bool.isRequired,
    solved: PropTypes.arrayOf(PropTypes.number),
+   refSoundSuccess: PropTypes.object.isRequired,
+   refSoundError: PropTypes.object.isRequired,
+   cardsBG: PropTypes.string.isRequired,
+   opacity: PropTypes.number.isRequired,
 }
 
 export default Board;

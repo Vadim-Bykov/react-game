@@ -5,8 +5,12 @@ import PropTypes from "prop-types";
 import ChangeSize from '../ChangeSize/ChangeSize';
 import Music from '../Music/Music';
 import Sound from '../Sound/Sound';
+import CardBackground from '../CardBackground/CardBackground';
 
-const Menu = ({ isActive, toggleIsMenuActive }) => {
+const Menu = (props) => {
+
+   const { isActive, toggleIsMenuActive, isMusicActive, toggleIsMusic, ...restProps } = props;
+
    const [hide, setHide] = useState(false);
 
    useEffect(() => {
@@ -33,8 +37,9 @@ const Menu = ({ isActive, toggleIsMenuActive }) => {
 
             <div className={style.menuContent}>
                <ChangeSize />
-               <Music />
-               <Sound />
+               <Music isMusicActive={isMusicActive} toggleIsMusic={toggleIsMusic} />
+               <Sound {...restProps} />
+               <CardBackground />
             </div>
          </div>
       </>
@@ -43,7 +48,9 @@ const Menu = ({ isActive, toggleIsMenuActive }) => {
 
 Menu.propTypes = {
    isActive: PropTypes.bool.isRequired,
+   isMusicActive: PropTypes.bool.isRequired,
    toggleIsMenuActive: PropTypes.func.isRequired,
+   toggleIsMusic: PropTypes.func.isRequired,
 }
 
 export default Menu;
