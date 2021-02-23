@@ -1,22 +1,22 @@
 import { connect } from 'react-redux';
 import { getIsActive } from '../../selectors/burgerSelectors';
-import { toggleIsActive } from '../../redux/burgerReducer';
+import { toggleIsMenuActive } from '../../redux/burgerReducer';
 import PropTypes from "prop-types";
 import Header from './Header';
 import Menu from '../Menu/Menu';
 
-const HeaderContainer = ({isActive, toggleIsActive}) => {
+const HeaderContainer = ({isActive, toggleIsMenuActive}) => {
    return (
       <>
-         <Header isActive={isActive} toggleIsActive={toggleIsActive} />
-         <Menu isActive={isActive} toggleIsActive={toggleIsActive} />
+         <Header isActive={isActive} toggleIsMenuActive={toggleIsMenuActive} />
+         <Menu isActive={isActive} toggleIsMenuActive={toggleIsMenuActive} />
       </>
    );
 }
 
 HeaderContainer.propTypes = {
    isActive: PropTypes.bool.isRequired,
-   toggleIsActive: PropTypes.func.isRequired,
+   toggleIsMenuActive: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
@@ -24,7 +24,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-   toggleIsActive,
+   toggleIsMenuActive,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);

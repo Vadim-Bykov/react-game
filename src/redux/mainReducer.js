@@ -140,7 +140,10 @@ export const showAllCards = () => (dispatch, getState) => {
   setTimeout(() => dispatch(setFlipped([])), 3000);
 };
 
-export const handleClick = (id, soundSuccess, soundError) => (dispatch, getState) => {
+export const handleClick = (id, soundSuccess, soundError) => (
+  dispatch,
+  getState
+) => {
   const cards = getState().main.cards;
   const flipped = getState().main.flipped;
   const solved = getState().main.solved;
@@ -161,21 +164,27 @@ export const handleClick = (id, soundSuccess, soundError) => (dispatch, getState
     if (isMatch(id, cards, flipped)) {
       dispatch(setSolved([...solved, flipped[0], id]));
       resetFlippedCards(dispatch);
-      soundSuccess.current.play();
+      getSound(getState, soundSuccess)
     } else {
       setTimeout(() => resetFlippedCards(dispatch), 1000);
-      soundError.current.play();
+      getSound(getState, soundError)
     }
   }
 };
-
-//  const sameCardClicked = (id) => flipped.includes(id);
 
 const isMatch = (id, cards, flipped) => {
   const clickedCard = cards.find((card) => card.id === id);
   const flippedCard = cards.find((card) => flipped[0] === card.id);
   return flippedCard.type === clickedCard.type;
 };
+
+const getSound = (getState, sound) => {
+  const isSoundActive = getState().burger.isSoundActive;
+  if (!isSoundActive) return;
+  const volume = getState().burger.volume;
+  sound.current.volume = volume;
+  sound.current.play();
+}
 
 const resetFlippedCards = (dispatch) => {
   dispatch(setFlipped([]));

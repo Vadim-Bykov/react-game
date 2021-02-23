@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import PropTypes from "prop-types";
 import ChangeSize from '../ChangeSize/ChangeSize';
 import Music from '../Music/Music';
+import Sound from '../Sound/Sound';
 
-const Menu = ({ isActive, toggleIsActive }) => {
+const Menu = ({ isActive, toggleIsMenuActive }) => {
    const [hide, setHide] = useState(false);
 
    useEffect(() => {
@@ -23,18 +24,17 @@ const Menu = ({ isActive, toggleIsActive }) => {
    return (
       <>
          <div className={cn(style.overlay, toggleClass)}
-            onClick={toggleIsActive} />
+            onClick={toggleIsMenuActive} />
          
          <div className={cn(style.baseMenu, toggleClass)}>
             <div className={style.headerBlock}>
                <h3 className={style.headerCaption}>Menu</h3>
             </div>
+
             <div className={style.menuContent}>
-
                <ChangeSize />
-
                <Music />
-               
+               <Sound />
             </div>
          </div>
       </>
@@ -43,7 +43,7 @@ const Menu = ({ isActive, toggleIsActive }) => {
 
 Menu.propTypes = {
    isActive: PropTypes.bool.isRequired,
-   toggleIsActive: PropTypes.func.isRequired,
+   toggleIsMenuActive: PropTypes.func.isRequired,
 }
 
 export default Menu;

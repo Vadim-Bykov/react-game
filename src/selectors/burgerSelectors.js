@@ -1,1 +1,1 @@
-export const getIsActive = (state) => state.burger.isActive;
+export const getIsActive = (state) => state.burger.isMenuActive;

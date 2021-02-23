@@ -9,10 +9,12 @@ const Card = ({ id, type, width, height, flipped, handleClick, disabled, solved 
    const refSoundSuccess = createRef();
    const refSoundError = createRef();
 
+   const background = 'none';
+
    return (
       <div
          className={`flip-container ${flipped ? 'flipped' : ''}`}
-         style={{ width, height }}
+         style={{ width, height, background }}
          onClick={() => disabled ? null : handleClick(id, refSoundSuccess, refSoundError)}
       >
          <div className='flipper'>

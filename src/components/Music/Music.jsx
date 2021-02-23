@@ -1,8 +1,9 @@
 import style from './Music.module.scss';
-import cn from "classnames";
+// import cn from "classnames";
 // import PropTypes from "prop-types";
 // import useSound from 'use-sound';
 import React, { useEffect, useState } from 'react';
+import Switch from '../Switch/Switch';
 
 const Music = () => {
 
@@ -36,18 +37,11 @@ const Music = () => {
          <span>Music</span>
 
          <input onChange={onchangeVol} id="range" min="0" max="100" value={value} type="range" />
+
+         <Switch toggle={onPlay} />
          
-         <label className={style.switchPlay}>
-            <input type="checkbox" onClick={onPlay} />
-            <span className={cn(style.slider, style.round)} />
-         </label>
       </div>
    );
-}
-
-// Music.propTypes = {
-//    isActive: PropTypes.bool.isRequired,
-//    toggleIsActive: PropTypes.func.isRequired,
-// }
+};
 
 export default Music;
