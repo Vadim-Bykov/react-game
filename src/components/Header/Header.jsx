@@ -1,4 +1,5 @@
 import style from './Header.module.scss';
+import PropTypes from "prop-types";
 import cn from "classnames";
 
 const Header = ({isActive, toggleIsMenuActive}) => {
@@ -14,5 +15,11 @@ const Header = ({isActive, toggleIsMenuActive}) => {
       </header>
    );
 }
+
+Header.propTypes = {
+   isActive: PropTypes.bool.isRequired,
+   toggleIsMenuActive: PropTypes.func.isRequired,
+}
+
 
 export default Header;

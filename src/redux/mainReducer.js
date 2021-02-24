@@ -1,4 +1,5 @@
 import initializeDeck from '../deck';
+import { setGameTime } from './statsReducer';
 
 const MAIN_SET_CARDS = 'MAIN_SET_CARDS';
 const MAIN_SET_FLIPPED = 'MAIN_SET_FLIPPED';
@@ -89,14 +90,6 @@ const mainReducer = (state = getInitialState(), action) => {
       localStorage.setItem('state', JSON.stringify(newState));
       return newState;
 
-    // case MAIN_SET_COUNT_PAIRS:
-    //   newState = {
-    //     ...state,
-    //     countPairs: action.count,
-    //   };
-    //   localStorage.setItem('state', JSON.stringify(newState));
-    //   return newState;
-
     case MAIN_SET_GAME_IN_PROGRESS:
       return {
         ...state,
@@ -117,7 +110,6 @@ export const setFlipped = (array) => ({ type: MAIN_SET_FLIPPED, array });
 export const setDimension = (value) => ({ type: MAIN_SET_DIMENSION, value });
 export const setSolved = (array) => ({ type: MAIN_SET_SOLVED, array });
 export const setDisabled = (boolean) => ({ type: MAIN_SET_DISABLED, boolean });
-// export const setCountPairs = (count) => ({ type: MAIN_SET_COUNT_PAIRS, count });
 export const setGameInProgress = (boolean) => ({
   type: MAIN_SET_GAME_IN_PROGRESS,
   boolean,
@@ -140,15 +132,13 @@ export const showAllCards = () => (dispatch, getState) => {
   setTimeout(() => dispatch(setFlipped([])), 3000);
 };
 
-export const handleClick = (id, soundSuccess, soundError) => (
-  dispatch,
-  getState
-) => {
+export const handleClick = (id, soundSuccess, soundError) => (dispatch, getState) => {
   const cards = getState().main.cards;
   const flipped = getState().main.flipped;
   const solved = getState().main.solved;
   const sameCardClicked = flipped.includes(id);
 
+  dispatch(setGameTime())
   dispatch(setDisabled(true));
   dispatch(setGameInProgress(true));
 

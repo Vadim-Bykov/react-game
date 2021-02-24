@@ -35,7 +35,7 @@ const burgerReducer = (state = getInitialState(), action) => {
         ...state,
         isMenuActive: !state.isMenuActive,
       };
-      localStorage.setItem('burger', JSON.stringify(newState));
+      localStorage.setItem('burger', JSON.stringify({...newState, isMenuActive: false, isMusicActive: false,}));
       return newState;
 
     case BURGER_TOGGLE_SOUND:
@@ -43,7 +43,7 @@ const burgerReducer = (state = getInitialState(), action) => {
         ...state,
         isSoundActive: !state.isSoundActive,
       };
-      localStorage.setItem('burger', JSON.stringify(newState));
+      localStorage.setItem('burger', JSON.stringify({...newState, isMenuActive: false, isMusicActive: false,}));
       return newState;
     
       case BURGER_TOGGLE_MUSIC:
@@ -51,7 +51,7 @@ const burgerReducer = (state = getInitialState(), action) => {
           ...state,
           isMusicActive: !state.isMusicActive,
         };
-        localStorage.setItem('burger', JSON.stringify(newState));
+        localStorage.setItem('burger', JSON.stringify({...newState, isMenuActive: false, isMusicActive: false,}));
         return newState;
 
     case BURGER_SET_SOUND_VOLUME:
@@ -59,7 +59,7 @@ const burgerReducer = (state = getInitialState(), action) => {
         ...state,
         volume: action.volume,
       };
-      localStorage.setItem('burger', JSON.stringify(newState));
+      localStorage.setItem('burger', JSON.stringify({...newState, isMenuActive: false, isMusicActive: false,}));
       return newState;
     
     case BURGER_SET_CARDS_BG:
@@ -67,7 +67,7 @@ const burgerReducer = (state = getInitialState(), action) => {
         ...state,
         cardsBG: action.color,
       };
-      localStorage.setItem('burger', JSON.stringify(newState));
+      localStorage.setItem('burger', JSON.stringify({...newState, isMenuActive: false, isMusicActive: false,}));
       return newState;
     
     case BURGER_SET_OPACITY_BG:
@@ -75,7 +75,7 @@ const burgerReducer = (state = getInitialState(), action) => {
         ...state,
         opacity: action.opacity,
       };
-      localStorage.setItem('burger', JSON.stringify(newState));
+      localStorage.setItem('burger', JSON.stringify({...newState, isMenuActive: false, isMusicActive: false,}));
       return newState;
   
 
