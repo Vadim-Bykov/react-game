@@ -138,7 +138,7 @@ export const handleClick = (id, soundSuccess, soundError) => (dispatch, getState
   const solved = getState().main.solved;
   const sameCardClicked = flipped.includes(id);
 
-  dispatch(setGameTime())
+  dispatch(setGameTime(true));
   dispatch(setDisabled(true));
   dispatch(setGameInProgress(true));
 
@@ -185,11 +185,13 @@ const resetFlippedCards = (dispatch) => {
 export const setNewCountPairs = (countPairs) => (dispatch) => {
   dispatch(resetState(countPairs));
   dispatch(showAllCards());
+  dispatch(setGameTime(false));
 };
 
 export const finishGame = (countPairs) => (dispatch) => {
   dispatch(resetState(countPairs));
   setTimeout(dispatch(showAllCards()));
+  dispatch(setGameTime(false));
 };
 
 export default mainReducer;
