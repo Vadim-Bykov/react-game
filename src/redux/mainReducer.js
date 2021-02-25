@@ -1,5 +1,5 @@
 import initializeDeck from '../deck';
-import { setGameTime } from './statsReducer';
+import { setGameTime, setTrueAttempt, setFalseAttempt, statsResetState, saveFinishedGame } from './statsReducer';
 
 const MAIN_SET_CARDS = 'MAIN_SET_CARDS';
 const MAIN_SET_FLIPPED = 'MAIN_SET_FLIPPED';
@@ -154,10 +154,12 @@ export const handleClick = (id, soundSuccess, soundError) => (dispatch, getState
     if (isMatch(id, cards, flipped)) {
       dispatch(setSolved([...solved, flipped[0], id]));
       resetFlippedCards(dispatch);
-      getSound(getState, soundSuccess)
+      dispatch(setTrueAttempt());
+      getSound(getState, soundSuccess);
     } else {
       setTimeout(() => resetFlippedCards(dispatch), 1000);
-      getSound(getState, soundError)
+      dispatch(setFalseAttempt());
+      getSound(getState, soundError);
     }
   }
 };
@@ -182,16 +184,17 @@ const resetFlippedCards = (dispatch) => {
   dispatch(setGameInProgress(false));
 };
 
-export const setNewCountPairs = (countPairs) => (dispatch) => {
-  dispatch(resetState(countPairs));
-  dispatch(showAllCards());
-  dispatch(setGameTime(false));
-};
+// export const setNewCountPairs = (countPairs) => (dispatch) => {
+//   dispatch(resetState(countPairs));
+//   dispatch(showAllCards());
+//   dispatch(setGameTime(false));
+// };
 
 export const finishGame = (countPairs) => (dispatch) => {
   dispatch(resetState(countPairs));
   setTimeout(dispatch(showAllCards()));
-  dispatch(setGameTime(false));
+  // dispatch(showAllCards());
+  dispatch(statsResetState(false));
 };
 
 export default mainReducer;

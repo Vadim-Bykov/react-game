@@ -1,0 +1,20 @@
+.statsBlock {
+  display: grid;
+  justify-items: stretch;
+  margin: 10px;
+  outline: 1px solid blue;
+}
+
+.row,
+.header{
+  display: grid;
+  // grid-template-columns: repeat (6, 1fr);
+  grid-template-columns:  1fr 1fr 1fr 1fr 1fr;
+  justify-content: space-between;
+  justify-items: center;
+  outline: 1px solid blue;
+
+  span{
+    text-align: center;
+  }
+}

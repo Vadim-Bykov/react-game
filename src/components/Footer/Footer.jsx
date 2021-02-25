@@ -7,7 +7,7 @@ const Footer = () => {
       <footer>
          <div className="wrapper">
             <div className={style.footer}>
-               <span>2020 </span>
+               <span>2021 </span>
                <span className={style.logoRS}>
                   <a href="https://rs.school/js" target="_blank" title="Курс «JavaScript/Front-end»" rel="noreferrer"><img
                      src={logoRS} alt="logo" width="50" /></a>

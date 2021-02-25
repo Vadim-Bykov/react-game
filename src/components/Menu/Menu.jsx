@@ -6,6 +6,7 @@ import ChangeSize from '../ChangeSize/ChangeSize';
 import Music from '../Music/Music';
 import Sound from '../Sound/Sound';
 import CardBackground from '../CardBackground/CardBackground';
+import { NavLink } from 'react-router-dom';
 
 const Menu = (props) => {
 
@@ -40,6 +41,8 @@ const Menu = (props) => {
                <Music isMusicActive={isMusicActive} toggleIsMusic={toggleIsMusic} />
                <Sound {...restProps} />
                <CardBackground />
+
+               <NavLink to='/statistic'>Statistic</NavLink>
             </div>
          </div>
       </>

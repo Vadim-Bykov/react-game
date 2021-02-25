@@ -10,9 +10,10 @@ import Board from './Board';
 import soundSuccess from '../../assets/sound/success.mp3';
 import soundError from '../../assets/sound/error.mp3';
 import { getCardsBG, getOpacityBG } from '../../selectors/burgerSelectors';
+import { saveFinishedGame } from '../../redux/statsReducer';
 
 
-const BoardContainer = ({ resizeBoard, handleClick, showAllCards, finishGame, cards, flipped, dimension, disabled, solved, setCards, countPairs, gameInProgress, cardsBG, opacity }) => {
+const BoardContainer = ({ resizeBoard, handleClick, showAllCards, finishGame, saveFinishedGame, cards, flipped, dimension, disabled, solved, setCards, countPairs, gameInProgress, cardsBG, opacity }) => {
 
   const refSoundSuccess = createRef();
   const refSoundError = createRef();
@@ -41,6 +42,7 @@ const BoardContainer = ({ resizeBoard, handleClick, showAllCards, finishGame, ca
   useEffect(() => {
     if (!cards.length) return;
     if (solved.length === cards.length) {
+      saveFinishedGame(countPairs);
       setTimeout(() => finishGame(countPairs), 1500);
     }
   }, [solved]);
@@ -77,6 +79,7 @@ BoardContainer.propTypes = {
   resizeBoard: PropTypes.func.isRequired,
   showAllCards: PropTypes.func.isRequired,
   finishGame: PropTypes.func.isRequired,
+  saveFinishedGame: PropTypes.func.isRequired,
   setCards: PropTypes.func.isRequired,
   cardsBG: PropTypes.string.isRequired,
   opacity: PropTypes.number.isRequired,
@@ -101,6 +104,7 @@ const mapDispatchToProps = {
   showAllCards,
   finishGame,
   setCards,
+  saveFinishedGame,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoardContainer);

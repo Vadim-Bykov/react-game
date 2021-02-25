@@ -4,6 +4,7 @@ const STATS_SET_SECONDS = 'STATS_SET_SECONDS';
 const STATS_SET_TRUE_ATTEMPT = 'STATS_SET_TRE_ATTEMPT';
 const STATS_SET_FALSE_ATTEMPT = 'STATS_SET_FALSE_ATTEMPT';
 const STATS_RESET_STATE = 'STATS_RESET_STATE';
+const STATS_SAVE_FINISHED_GAME = 'STATS_SAVE_FINISHED_GAME';
 // const STATS_SET_COUNT_GAMES = 'STATS_SET_COUNT_GAMES';
 
 const initialState = {
@@ -12,24 +13,24 @@ const initialState = {
   seconds: 0,
   trueAttempts: 0,
   falseAttempts: 0,
-  countGames: 0,
+  finishedGames: [],
   // attempts: 0,
 };
 
-// const getInitialState = () => {
-//   let state;
-//   const localState = JSON.parse(localStorage.getItem('burger'));
-//   if (localState) {
-//     state = localState;
-//   } else {
-//     localStorage.setItem('burger', JSON.stringify(initialState));
-//     state = initialState;
-//   }
+const getInitialState = () => {
+  let state;
+  const localState = JSON.parse(localStorage.getItem('stats'));
+  if (localState) {
+    state = localState;
+  } else {
+    localStorage.setItem('stats', JSON.stringify(initialState));
+    state = initialState;
+  }
 
-//   return state;
-// };
+  return state;
+};
 
-const statsReducer = (state = initialState, action) => {
+const statsReducer = (state = getInitialState(), action) => {
   let newState;
   switch (action.type) {
     case STATS_RESET_STATE:
@@ -40,9 +41,8 @@ const statsReducer = (state = initialState, action) => {
         seconds: 0,
         trueAttempts: 0,
         falseAttempts: 0,
-        countGames: 0,
       };
-      // localStorage.setItem('burger', JSON.stringify(newState));
+      localStorage.setItem('stats', JSON.stringify(newState));
       return newState;
     
     case STATS_SET_GAME_TIME:
@@ -50,7 +50,7 @@ const statsReducer = (state = initialState, action) => {
         ...state,
         gameTime: action.boolean,
       };
-      // localStorage.setItem('burger', JSON.stringify(newState));
+      localStorage.setItem('stats', JSON.stringify(newState));
       return newState;
     
     case STATS_SET_MINUTES:
@@ -58,7 +58,7 @@ const statsReducer = (state = initialState, action) => {
         ...state,
         minutes: action.minutes,
       };
-      // localStorage.setItem('burger', JSON.stringify(newState));
+      localStorage.setItem('stats', JSON.stringify(newState));
       return newState;
     
     case STATS_SET_SECONDS:
@@ -66,78 +66,71 @@ const statsReducer = (state = initialState, action) => {
         ...state,
         seconds: action.seconds,
       };
-      // localStorage.setItem('burger', JSON.stringify(newState));
+      localStorage.setItem('stats', JSON.stringify(newState));
       return newState;
 
     case STATS_SET_TRUE_ATTEMPT:
       newState = {
         ...state,
-        falseAttempts: state.falseAttempts++,
+        trueAttempts: state.trueAttempts += 1,
       };
-      // localStorage.setItem('burger', JSON.stringify(newState));
+      localStorage.setItem('stats', JSON.stringify(newState));
       return newState;
     
       case STATS_SET_FALSE_ATTEMPT:
         newState = {
           ...state,
-          trueAttempts: state.trueAttempts++,
+          falseAttempts: state.falseAttempts += 1,
         };
-      // localStorage.setItem('burger', JSON.stringify(newState));
+      localStorage.setItem('stats', JSON.stringify(newState));
       return newState;
 
-    // case STATS_SET_COUNT_GAMES:
-    //   newState = {
-    //     ...state,
-    //     countGames: state.countGames++,
-    //   };
-    // // localStorage.setItem('burger', JSON.stringify(newState));
-    // return newState;
+    case STATS_SAVE_FINISHED_GAME:
+      newState = {
+        ...state,
+        finishedGames: [
+          {
+            size: action.size,
+            minutes: state.minutes,
+            seconds: state.seconds,
+            trueAttempts: state.trueAttempts,
+            falseAttempts: state.falseAttempts,
+            id: Math.floor(Math.random() * 1000),
+          },
+          ...state.finishedGames.slice(0, 9),
+        ],
+      };
+    localStorage.setItem('statsPage', JSON.stringify(newState.finishedGames));
+    return newState;
 
     default:
       return state;
   }
 };
 
-export const setResetState = () => ({ type: STATS_RESET_STATE });
+export const statsResetState = () => ({ type: STATS_RESET_STATE });
 export const setGameTime = (boolean) => ({ type: STATS_SET_GAME_TIME, boolean });
 export const setMinutes = (minutes) => ({ type: STATS_SET_MINUTES, minutes });
 export const setSeconds = (seconds) => ({ type: STATS_SET_SECONDS, seconds });
-
 export const setTrueAttempt = () => ({ type: STATS_SET_TRUE_ATTEMPT });
-
 export const setFalseAttempt = () => ({ type: STATS_SET_FALSE_ATTEMPT });
+export const saveFinishedGame = (size) => ({ type: STATS_SAVE_FINISHED_GAME, size });
 
-// export const setCountGames = () => ({ type: STATS_SET_COUNT_GAMES });
-
-
-export const updateGameTime = (minutes, seconds) => (dispatch, getState) => {
-  // const time = getState().stats.gameTime;
-  // dispatch(setGameTime());
+export const updateGameTime = (minutes, seconds) => (dispatch) => {
   const time = timer(minutes, seconds);
   dispatch(setMinutes(time.minutes));
   dispatch(setSeconds(time.seconds));
   
 };
 
-
-// let second = 0;
-// let minute = 0;
-
 function timer(minutes, seconds) {
-  // permitStartTimer = false;
   seconds++;
   if (seconds === 60) {
     seconds = 0;
     minutes++;
   };
-  // time.innerHTML = `${addZero(minutes)}<span>:</span>${addZero(seconds)}`;
-  // setTimeout(timer, 1000);
   return {seconds, minutes}
 };
 
-// Добавление нуля в значения времени до 10
-function addZero(n) {
-  return (n < 10 ? '0' + n : n)
-};
 
 export default statsReducer;
