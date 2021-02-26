@@ -90,6 +90,7 @@ const statsReducer = (state = getInitialState(), action) => {
         ...state,
         finishedGames: [
           {
+            date: action.date,
             size: action.size,
             minutes: state.minutes,
             seconds: state.seconds,
@@ -114,7 +115,7 @@ export const setMinutes = (minutes) => ({ type: STATS_SET_MINUTES, minutes });
 export const setSeconds = (seconds) => ({ type: STATS_SET_SECONDS, seconds });
 export const setTrueAttempt = () => ({ type: STATS_SET_TRUE_ATTEMPT });
 export const setFalseAttempt = () => ({ type: STATS_SET_FALSE_ATTEMPT });
-export const saveFinishedGame = (size) => ({ type: STATS_SAVE_FINISHED_GAME, size });
+export const saveFinishedGame = (size) => ({ type: STATS_SAVE_FINISHED_GAME, size, date: getTime() });
 
 export const updateGameTime = (minutes, seconds) => (dispatch) => {
   const time = timer(minutes, seconds);
@@ -131,6 +132,8 @@ function timer(minutes, seconds) {
   };
   return {seconds, minutes}
 };
+
+const getTime = () => new Date().toString().slice(0, 24);
 
 
 export default statsReducer;

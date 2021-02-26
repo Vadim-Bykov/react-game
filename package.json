@@ -2,7 +2,7 @@
   "name": "react-1",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://Vadim-Bykov.github.io/React",
+  "homepage": "http://Vadim-Bykov.github.io/react-game",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",

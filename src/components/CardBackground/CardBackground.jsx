@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 // import useSound from 'use-sound';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { setCardsBG, setOpacityBG } from '../../redux/burgerReducer';
+import { setCardsBG, setOpacityBG } from '../../store/burgerReducer';
 import { getOpacityBG } from '../../selectors/burgerSelectors';
 import cn from "classnames";
 

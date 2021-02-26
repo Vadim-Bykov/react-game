@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { getIsActive, getIsMusicActive, getIsSoundActive } from '../../selectors/burgerSelectors';
-import { setSoundVolume, toggleIsMenuActive, toggleIsMusic, toggleIsSound } from '../../redux/burgerReducer';
+import { setSoundVolume, toggleIsMenuActive, toggleIsMusic, toggleIsSound } from '../../store/burgerReducer';
 import PropTypes from "prop-types";
 import Header from './Header';
 import Menu from '../Menu/Menu';

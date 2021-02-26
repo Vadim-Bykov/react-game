@@ -1,7 +1,5 @@
-import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { updateGameTime, statsResetState } from '../../redux/statsReducer';
-import { getGameTime, getSeconds, getMinutes, getTrueAttempts, getFalseAttempts, getFinishedGames } from '../../selectors/statsSelectors';
+import { getFinishedGames } from '../../selectors/statsSelectors';
 import PropTypes from "prop-types";
 import StatsPage from './StatsPage';
 import style from './StatsPage.module.scss';
@@ -12,8 +10,9 @@ const StatsPageContainer = ({ finishedGames }) => {
       return (n < 10 ? '0' + n : n)
    };
 
-   const statistic = finishedGames.map(({ id, size, minutes, seconds, trueAttempts, falseAttempts }, i) => (
+   const statistic = finishedGames.map(({ id, date, size, minutes, seconds, trueAttempts, falseAttempts }, i) => (
       <StatsPage key={id || i}
+         date={date}
          size={size}
          time={`${addZero(minutes)}:${addZero(seconds)}`}
          trueAttempts={trueAttempts}
@@ -23,15 +22,19 @@ const StatsPageContainer = ({ finishedGames }) => {
    ));
    
    return (
-      <div className={style.statsBlock} >
-         <div  className={style.header} >
-            <span>Field size</span>
-            <span>Time</span>
-            <span>Right attempts</span>
-            <span>Wrong attempts</span>
-            <span>All attempts</span>
+      <div>
+         <h2 className={style.title}>Game statistic</h2>
+         <div className={style.statsBlock} >
+            <div className={style.header} >
+               <span>Date</span>
+               <span>Field size</span>
+               <span>Time</span>
+               <span>Right attempts</span>
+               <span>Wrong attempts</span>
+               <span>All attempts</span>
+            </div>
+            {statistic}
          </div>
-         {statistic}
       </div>
    );
 };

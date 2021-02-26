@@ -1,16 +1,35 @@
 import './Card.scss';
 import PropTypes from "prop-types";
-import back from '../../img/js-badge.svg';
+import back from '../../assets/img/js-badge.svg';
+import React, { useRef } from 'react';
 
 const Card = ({ id, type, width, height, flipped, handleClick, disabled, solved, refSoundSuccess, refSoundError, cardsBG, opacity }) => {
 
    const background = `rgba(${cardsBG}, ${opacity})`;
 
+   const cardRef = React.createRef();
+
+   const getFocus = () => {
+      console.log(cardRef.current)
+      cardRef.current.focus()
+   };
+
+   const onClickCard = () => {
+      if (disabled) {
+         return null
+      } else {
+         handleClick(id, refSoundSuccess, refSoundError);
+         cardRef.current.focus()
+      }
+   }
+
    return (
       <div
+         ref={cardRef}
          className={`flip-container ${flipped ? 'flipped' : ''}`}
          style={{ width, height, background }}
-         onClick={() => disabled ? null : handleClick(id, refSoundSuccess, refSoundError)}
+         // onClick={() => disabled ? null : handleClick(id, refSoundSuccess, refSoundError)}
+         onClick={onClickCard}
       >
          <div className='flipper'>
             <img

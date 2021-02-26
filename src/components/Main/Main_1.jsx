@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Board from '../Board/Board_1';
-import initializeDeck from '../../deck';
+import initializeDeck from '../../utils/deck';
 
 const Main = () => {
   const [cards, setCards] = useState([]);

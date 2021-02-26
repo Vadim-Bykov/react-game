@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { resetState, finishGame } from '../../redux/mainReducer';
+import { resetState, finishGame } from '../../store/mainReducer';
 import style from './ChangeSize.module.scss';
 import PropTypes from "prop-types";
 import { getCountPairs } from '../../selectors/mainSelectors';
@@ -16,7 +16,7 @@ const ChangeSize = ({finishGame, resetState, countPairs}) => {
          <div>
             <span>Change board size </span>
             <select className={cn("form-select", "form-select-lg", "mb-3")}  name="ch" id="size" value={countPairs} onChange={onChangeSelect} >
-               <option>1</option>
+               {/* <option>1</option> */}
                <option>2</option>
                <option>3</option>
                <option>4</option>

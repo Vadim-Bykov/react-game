@@ -1,4 +1,4 @@
-import style from './Menu.module.scss';
+import style from './MenuSettings.module.scss';
 import cn from "classnames";
 import { useEffect, useState } from 'react';
 import PropTypes from "prop-types";
@@ -8,7 +8,7 @@ import Sound from '../Sound/Sound';
 import CardBackground from '../CardBackground/CardBackground';
 import { NavLink } from 'react-router-dom';
 
-const Menu = (props) => {
+const MenuSettings = (props) => {
 
    const { isActive, toggleIsMenuActive, isMusicActive, toggleIsMusic, ...restProps } = props;
 
@@ -36,13 +36,7 @@ const Menu = (props) => {
                <h3 className={style.headerCaption}>Menu</h3>
             </div>
 
-            <nav className={style.nav}>
-               <NavLink activeClassName={style.active} to='/home'>Home page</NavLink>
-               <NavLink activeClassName={style.active} to='/statistic'>Statistic page</NavLink>
-            </nav>
-
             <div className={style.menuContent}>
-              
                <ChangeSize />
                <Music isMusicActive={isMusicActive} toggleIsMusic={toggleIsMusic} />
                <Sound {...restProps} />
@@ -53,11 +47,11 @@ const Menu = (props) => {
    );
 }
 
-Menu.propTypes = {
+MenuSettings.propTypes = {
    isActive: PropTypes.bool.isRequired,
    isMusicActive: PropTypes.bool.isRequired,
    toggleIsMenuActive: PropTypes.func.isRequired,
    toggleIsMusic: PropTypes.func.isRequired,
 }
 
-export default Menu;
+export default MenuSettings;

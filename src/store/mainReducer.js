@@ -1,5 +1,5 @@
-import initializeDeck from '../deck';
-import { setGameTime, setTrueAttempt, setFalseAttempt, statsResetState, saveFinishedGame } from './statsReducer';
+import initializeDeck from '../utils/deck';
+import { setGameTime, setTrueAttempt, setFalseAttempt, statsResetState } from './statsReducer';
 
 const MAIN_SET_CARDS = 'MAIN_SET_CARDS';
 const MAIN_SET_FLIPPED = 'MAIN_SET_FLIPPED';
