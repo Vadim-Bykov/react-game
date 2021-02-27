@@ -7,7 +7,6 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import HeaderContainer from '../Header/HeaderContainer';
 import StatsPageContainer from '../StatsPage/StatsPageContainer';
-// import BoardContainer from '../Board/BoardContainer';
 
 function App() {
   return (

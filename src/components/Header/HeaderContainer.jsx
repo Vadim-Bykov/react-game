@@ -1,3 +1,4 @@
+import { useHotkeys } from "react-hotkeys-hook";
 import { connect } from 'react-redux';
 import { getIsActive, getIsMusicActive, getIsSoundActive } from '../../selectors/burgerSelectors';
 import { setSoundVolume, toggleIsMenuActive, toggleIsMusic, toggleIsSound } from '../../store/burgerReducer';
@@ -8,6 +9,9 @@ import Menu from '../Menu/Menu';
 const HeaderContainer = (props) => {
    
    const { isActive, toggleIsMenuActive } = props;
+
+  useHotkeys('ctrl+m', toggleIsMenuActive);
+  useHotkeys('esc', toggleIsMenuActive);
 
    return (
       <>

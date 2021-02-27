@@ -1,6 +1,7 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import thunkMiddleware from 'redux-thunk';
+import autoplayReducer from './autoplay/reducer';
 import burgerReducer from './burgerReducer';
 import mainReducer from './mainReducer';
 import statsReducer from './statsReducer';
@@ -11,7 +12,8 @@ const reducers = combineReducers({
   form: formReducer,
   main: mainReducer,
   burger: burgerReducer,
-  stats: statsReducer
+  stats: statsReducer,
+  autoplay: autoplayReducer,
 });
 const store = createStore(
   reducers,

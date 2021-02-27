@@ -1,11 +1,15 @@
 import { connect } from 'react-redux';
-import { resetState, finishGame } from '../../store/mainReducer';
+import { finishGame } from '../../store/mainReducer';
 import style from './ChangeSize.module.scss';
 import PropTypes from "prop-types";
 import { getCountPairs } from '../../selectors/mainSelectors';
 import cn from "classnames";
+import { useHotkeys } from "react-hotkeys-hook";
+import { useRef } from 'react';
 
-const ChangeSize = ({finishGame, resetState, countPairs}) => {
+const ChangeSize = ({ finishGame, countPairs }) => {
+   const newGameRef = useRef(null);
+   useHotkeys('n+g', () => newGameRef.current.click());
 
    const onChangeSelect = (e) => {
       finishGame(+e.target.value);
@@ -27,7 +31,7 @@ const ChangeSize = ({finishGame, resetState, countPairs}) => {
          </div>
          <div className={style.newGame}>
             <span>You can start new game</span>
-            <button className='btn btn-secondary' onClick={() => finishGame(countPairs)}>New game</button>
+            <button  ref={newGameRef} className='btn btn-secondary' onClick={() => finishGame(countPairs)}>New game</button>
          </div>
       </div>
    );
@@ -35,12 +39,12 @@ const ChangeSize = ({finishGame, resetState, countPairs}) => {
 
 ChangeSize.propTypes = {
    finishGame: PropTypes.func.isRequired,
-   resetState: PropTypes.func.isRequired,
    countPairs: PropTypes.number.isRequired,
+   // resetState: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
    countPairs: getCountPairs(state),
 })
 
-export default connect(mapStateToProps, { finishGame, resetState })(ChangeSize);
+export default connect(mapStateToProps, { finishGame })(ChangeSize);

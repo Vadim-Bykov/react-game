@@ -1,35 +1,32 @@
 import './Card.scss';
 import PropTypes from "prop-types";
 import back from '../../assets/img/js-badge.svg';
-import React, { useRef } from 'react';
+import { useHotkeys } from "react-hotkeys-hook";
+import { useEffect, useRef } from 'react';
 
-const Card = ({ id, type, width, height, flipped, handleClick, disabled, solved, refSoundSuccess, refSoundError, cardsBG, opacity }) => {
+const Card = ({ i, id, type, width, height, flipped, handleClick, disabled, solved, refSoundSuccess, refSoundError, cardsBG, opacity, refs, addRef, cards }) => {
+
+   const cardRef = useRef(null);
+   
+   useHotkeys(`${i}`, () => {
+      cardRef.current.click()
+   });
+
+   useEffect(() => {
+      if (refs.length >= cards.length) return;
+      addRef(cardRef);
+   }, [type]);
+   
 
    const background = `rgba(${cardsBG}, ${opacity})`;
 
-   const cardRef = React.createRef();
-
-   const getFocus = () => {
-      console.log(cardRef.current)
-      cardRef.current.focus()
-   };
-
-   const onClickCard = () => {
-      if (disabled) {
-         return null
-      } else {
-         handleClick(id, refSoundSuccess, refSoundError);
-         cardRef.current.focus()
-      }
-   }
-
    return (
       <div
+         id={id}
          ref={cardRef}
          className={`flip-container ${flipped ? 'flipped' : ''}`}
          style={{ width, height, background }}
-         // onClick={() => disabled ? null : handleClick(id, refSoundSuccess, refSoundError)}
-         onClick={onClickCard}
+         onClick={() => disabled ? null : handleClick(id, refSoundSuccess, refSoundError)}
       >
          <div className='flipper'>
             <img
@@ -43,6 +40,7 @@ const Card = ({ id, type, width, height, flipped, handleClick, disabled, solved,
 }
 
 Card.propTypes = {
+   i: PropTypes.number.isRequired,
    id: PropTypes.number.isRequired,
    width: PropTypes.number.isRequired,
    height: PropTypes.number.isRequired,

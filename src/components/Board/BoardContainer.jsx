@@ -11,9 +11,11 @@ import soundSuccess from '../../assets/sound/success.mp3';
 import soundError from '../../assets/sound/error.mp3';
 import { getCardsBG, getOpacityBG } from '../../selectors/burgerSelectors';
 import { saveFinishedGame } from '../../store/statsReducer';
+import { getRefs } from '../../store/autoplay/selectors';
+import { addRef } from '../../store/autoplay/actions';
 
 
-const BoardContainer = ({ resizeBoard, handleClick, showAllCards, finishGame, saveFinishedGame, cards, flipped, dimension, disabled, solved, setCards, countPairs, gameInProgress, cardsBG, opacity }) => {
+const BoardContainer = ({ resizeBoard, handleClick, showAllCards, finishGame, saveFinishedGame, cards, flipped, dimension, disabled, solved, setCards, countPairs, gameInProgress, cardsBG, opacity, refs, addRef }) => {
 
   const refSoundSuccess = createRef();
   const refSoundError = createRef();
@@ -60,6 +62,8 @@ const BoardContainer = ({ resizeBoard, handleClick, showAllCards, finishGame, sa
         refSoundError={refSoundError}
         cardsBG={cardsBG}
         opacity={opacity}
+        refs={refs}
+        addRef={addRef}
       />
       <audio ref={refSoundSuccess} src={soundSuccess} />
       <audio ref={refSoundError} src={soundError} />
@@ -83,6 +87,8 @@ BoardContainer.propTypes = {
   setCards: PropTypes.func.isRequired,
   cardsBG: PropTypes.string.isRequired,
   opacity: PropTypes.number.isRequired,
+  refs: PropTypes.array.isRequired,
+  addRef: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -94,8 +100,8 @@ const mapStateToProps = (state) => ({
   countPairs: getCountPairs(state),
   gameInProgress: getGameInProgress(state),
   cardsBG: getCardsBG(state),
-  opacity: getOpacityBG(state)
-
+  opacity: getOpacityBG(state),
+  refs: getRefs(state),
 });
 
 const mapDispatchToProps = {
@@ -105,6 +111,7 @@ const mapDispatchToProps = {
   finishGame,
   setCards,
   saveFinishedGame,
+  addRef,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoardContainer);

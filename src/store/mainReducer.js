@@ -1,4 +1,5 @@
 import initializeDeck from '../utils/deck';
+import { resetAutoplayState } from './autoplay/actions';
 import { setGameTime, setTrueAttempt, setFalseAttempt, statsResetState } from './statsReducer';
 
 const MAIN_SET_CARDS = 'MAIN_SET_CARDS';
@@ -6,7 +7,6 @@ const MAIN_SET_FLIPPED = 'MAIN_SET_FLIPPED';
 const MAIN_SET_DIMENSION = 'MAIN_SET_DIMENSION';
 const MAIN_SET_SOLVED = 'MAIN_SET_SOLVED';
 const MAIN_SET_DISABLED = 'MAIN_SET_DISABLED';
-// const MAIN_SET_COUNT_PAIRS = 'MAIN_SET_COUNT_PAIRS';
 const MAIN_RESET_STATE = 'MAIN_RESET_STATE';
 const MAIN_SET_GAME_IN_PROGRESS = 'MAIN_SET_GAME_IN_PROGRESS';
 
@@ -184,17 +184,12 @@ const resetFlippedCards = (dispatch) => {
   dispatch(setGameInProgress(false));
 };
 
-// export const setNewCountPairs = (countPairs) => (dispatch) => {
-//   dispatch(resetState(countPairs));
-//   dispatch(showAllCards());
-//   dispatch(setGameTime(false));
-// };
-
 export const finishGame = (countPairs) => (dispatch) => {
   dispatch(resetState(countPairs));
   setTimeout(dispatch(showAllCards()));
   // dispatch(showAllCards());
   dispatch(statsResetState(false));
+  dispatch(resetAutoplayState())
 };
 
 export default mainReducer;

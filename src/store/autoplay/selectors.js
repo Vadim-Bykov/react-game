@@ -1,0 +1,1 @@
+export const getRefs = (state) => state.autoplay.refs;

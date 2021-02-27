@@ -7,6 +7,7 @@ import Music from '../Music/Music';
 import Sound from '../Sound/Sound';
 import CardBackground from '../CardBackground/CardBackground';
 import { NavLink } from 'react-router-dom';
+import Autoplay from '../Autoplay/Autoplay';
 
 const Menu = (props) => {
 
@@ -47,6 +48,7 @@ const Menu = (props) => {
                <Music isMusicActive={isMusicActive} toggleIsMusic={toggleIsMusic} />
                <Sound {...restProps} />
                <CardBackground />
+               <Autoplay />
             </div>
          </div>
       </>
