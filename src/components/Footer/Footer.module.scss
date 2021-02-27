@@ -1,17 +1,17 @@
 .footer {
-  // width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px;
-  border-top: 3px solid fuchsia;
-  background: linear-gradient(to bottom, #7f7fd5, #86a8e7, #91eae4);
+  background-color: #f76b38;
+  border-top: 3px solid #f54506;
 }
 
 .footer span {
   font-size: 1.5rem;
   margin-right: 15px;
   align-self: center;
+  color: #FFFFFF;
 }
 
 .logoRS:hover {

@@ -1,16 +1,16 @@
 // import './Board.css';
 import React, { createRef, useEffect } from 'react';
-import { handleClick, resizeBoard, showAllCards, finishGame, setCards } from '../../store/mainReducer';
+import { handleClick, resizeBoard, showAllCards, finishGame, setCards } from '../../store/main/mainReducer';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import { getCards, getCountPairs, getDimension, getDisabled, getFlipped, getGameInProgress, getSolved } from '../../selectors/mainSelectors';
-import initializeDeck from '../../utils/deck';
+import initializeDeck from '../../store/utils/deck';
 import Board from './Board';
 // import Card from '../Card/Card';
 import soundSuccess from '../../assets/sound/success.mp3';
 import soundError from '../../assets/sound/error.mp3';
 import { getCardsBG, getOpacityBG } from '../../selectors/burgerSelectors';
-import { saveFinishedGame } from '../../store/statsReducer';
+import { saveFinishedGame } from '../../store/stats/statsReducer';
 import { getRefs } from '../../store/autoplay/selectors';
 import { addRef } from '../../store/autoplay/actions';
 

@@ -1,6 +1,7 @@
 import initializeDeck from '../utils/deck';
-import { resetAutoplayState } from './autoplay/actions';
-import { setGameTime, setTrueAttempt, setFalseAttempt, statsResetState } from './statsReducer';
+import { resetAutoplayState } from '../autoplay/actions';
+import { setGameTime, setTrueAttempt, setFalseAttempt, statsResetState } from '../stats/statsReducer';
+import { getInitialState } from '../utils/getInitialState';
 
 const MAIN_SET_CARDS = 'MAIN_SET_CARDS';
 const MAIN_SET_FLIPPED = 'MAIN_SET_FLIPPED';
@@ -20,20 +21,7 @@ const initialState = {
   gameInProgress: false,
 };
 
-const getInitialState = () => {
-  let state;
-  const localState = JSON.parse(localStorage.getItem('state'));
-  if (localState) {
-    state = localState;
-  } else {
-    localStorage.setItem('state', JSON.stringify(initialState));
-    state = initialState;
-  }
-
-  return state;
-};
-
-const mainReducer = (state = getInitialState(), action) => {
+const mainReducer = (state = getInitialState('state', initialState), action) => {
   let newState;
   switch (action.type) {
     case MAIN_RESET_STATE:

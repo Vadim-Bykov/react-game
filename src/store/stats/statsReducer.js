@@ -1,3 +1,5 @@
+import { getInitialState } from "../utils/getInitialState";
+
 const STATS_SET_GAME_TIME = 'STATS_SET_GAME_TIME';
 const STATS_SET_MINUTES = 'STATS_SET_MINUTES';
 const STATS_SET_SECONDS = 'STATS_SET_SECONDS';
@@ -5,7 +7,6 @@ const STATS_SET_TRUE_ATTEMPT = 'STATS_SET_TRE_ATTEMPT';
 const STATS_SET_FALSE_ATTEMPT = 'STATS_SET_FALSE_ATTEMPT';
 const STATS_RESET_STATE = 'STATS_RESET_STATE';
 const STATS_SAVE_FINISHED_GAME = 'STATS_SAVE_FINISHED_GAME';
-// const STATS_SET_COUNT_GAMES = 'STATS_SET_COUNT_GAMES';
 
 const initialState = {
   gameTime: false,
@@ -14,23 +15,9 @@ const initialState = {
   trueAttempts: 0,
   falseAttempts: 0,
   finishedGames: [],
-  // attempts: 0,
 };
 
-const getInitialState = () => {
-  let state;
-  const localState = JSON.parse(localStorage.getItem('stats'));
-  if (localState) {
-    state = localState;
-  } else {
-    localStorage.setItem('stats', JSON.stringify(initialState));
-    state = initialState;
-  }
-
-  return state;
-};
-
-const statsReducer = (state = getInitialState(), action) => {
+const statsReducer = (state = getInitialState('stats', initialState), action) => {
   let newState;
   switch (action.type) {
     case STATS_RESET_STATE:

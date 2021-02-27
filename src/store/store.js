@@ -2,9 +2,9 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import thunkMiddleware from 'redux-thunk';
 import autoplayReducer from './autoplay/reducer';
-import burgerReducer from './burgerReducer';
-import mainReducer from './mainReducer';
-import statsReducer from './statsReducer';
+import burgerReducer from './burger/burgerReducer';
+import mainReducer from './main/mainReducer';
+import statsReducer from './stats/statsReducer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

@@ -1,12 +1,10 @@
 .header {
-  // width: 100%;
   height: 80px;
-  background: linear-gradient(to bottom, #7f7fd5, #86a8e7, #91eae4);
-  border-bottom: 3px solid fuchsia;
+  background-color:#f76b38;
+  border-bottom: 3px solid #f54506;
   display: flex;
   justify-content: center;
   align-items: center;
-  // outline: 1px solid blue;
   position: relative;
 
 
@@ -69,8 +67,7 @@
       line-height: 130%;
       text-align: center;
       letter-spacing: 0.06em;
-      color: #161616;
+      color: #FFFFFF;
       margin: 20px;
-      // outline: 1px solid blue;
     }
 }

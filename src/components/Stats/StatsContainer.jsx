@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { updateGameTime, statsResetState } from '../../store/statsReducer';
+import { updateGameTime, statsResetState } from '../../store/stats/statsReducer';
 import { getGameTime, getSeconds, getMinutes, getTrueAttempts, getFalseAttempts } from '../../selectors/statsSelectors';
 import PropTypes from "prop-types";
 import Stats from './Stats';
