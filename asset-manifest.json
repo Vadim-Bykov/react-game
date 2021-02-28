@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/react-game/static/css/main.eef2ab3a.chunk.css",
-    "main.js": "/react-game/static/js/main.26558752.chunk.js",
-    "main.js.map": "/react-game/static/js/main.26558752.chunk.js.map",
+    "main.js": "/react-game/static/js/main.92e93aad.chunk.js",
+    "main.js.map": "/react-game/static/js/main.92e93aad.chunk.js.map",
     "runtime-main.js": "/react-game/static/js/runtime-main.a9c51f71.js",
     "runtime-main.js.map": "/react-game/static/js/runtime-main.a9c51f71.js.map",
     "static/js/2.1e6b2b56.chunk.js": "/react-game/static/js/2.1e6b2b56.chunk.js",
@@ -33,6 +33,6 @@
     "static/js/runtime-main.a9c51f71.js",
     "static/js/2.1e6b2b56.chunk.js",
     "static/css/main.eef2ab3a.chunk.css",
-    "static/js/main.26558752.chunk.js"
+    "static/js/main.92e93aad.chunk.js"
   ]
 }
