@@ -3,20 +3,22 @@ import React, { createRef, useEffect } from 'react';
 import { handleClick, resizeBoard, showAllCards, finishGame, setCards } from '../../store/main/mainReducer';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
-import { getCards, getCountPairs, getDimension, getDisabled, getFlipped, getGameInProgress, getSolved } from '../../selectors/mainSelectors';
-import initializeDeck from '../../store/utils/deck';
+import { getCards, getCountPairs, getDimension, getDisabled, getFlipped, getGameInProgress, getSolved } from '../../store/main/selectors';
+import initializeDeck from '../../store/utils/getDeck';
 import Board from './Board';
 // import Card from '../Card/Card';
-import soundSuccess from '../../assets/sound/success.mp3';
+import soundSuccess from '../../assets/sound/correct.mp3';
+import soundFinish from '../../assets/sound/success.mp3';
 import soundError from '../../assets/sound/error.mp3';
-import { getCardsBG, getOpacityBG } from '../../selectors/burgerSelectors';
+import { getCardsBG, getIsSoundActive, getOpacityBG } from '../../store/burger/selectors';
 import { saveFinishedGame } from '../../store/stats/statsReducer';
 import { getRefs } from '../../store/autoplay/selectors';
 import { addRef } from '../../store/autoplay/actions';
 
 
-const BoardContainer = ({ resizeBoard, handleClick, showAllCards, finishGame, saveFinishedGame, cards, flipped, dimension, disabled, solved, setCards, countPairs, gameInProgress, cardsBG, opacity, refs, addRef }) => {
+const BoardContainer = ({ resizeBoard, handleClick, showAllCards, finishGame, saveFinishedGame, cards, flipped, dimension, disabled, solved, setCards, countPairs, gameInProgress, cardsBG, opacity, refs, addRef, isSoundActive }) => {
 
+  const refSoundFinish = createRef();
   const refSoundSuccess = createRef();
   const refSoundError = createRef();
 
@@ -44,6 +46,7 @@ const BoardContainer = ({ resizeBoard, handleClick, showAllCards, finishGame, sa
   useEffect(() => {
     if (!cards.length) return;
     if (solved.length === cards.length) {
+      if (isSoundActive) refSoundFinish.current.play();
       saveFinishedGame(countPairs);
       setTimeout(() => finishGame(countPairs), 1500);
     }
@@ -65,6 +68,7 @@ const BoardContainer = ({ resizeBoard, handleClick, showAllCards, finishGame, sa
         refs={refs}
         addRef={addRef}
       />
+      <audio ref={refSoundFinish} src={soundFinish} />
       <audio ref={refSoundSuccess} src={soundSuccess} />
       <audio ref={refSoundError} src={soundError} />
     </>
@@ -89,6 +93,7 @@ BoardContainer.propTypes = {
   opacity: PropTypes.number.isRequired,
   refs: PropTypes.array.isRequired,
   addRef: PropTypes.func.isRequired,
+  isSoundActive: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -102,6 +107,7 @@ const mapStateToProps = (state) => ({
   cardsBG: getCardsBG(state),
   opacity: getOpacityBG(state),
   refs: getRefs(state),
+  isSoundActive: getIsSoundActive(state),
 });
 
 const mapDispatchToProps = {

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { setCardsBG, setOpacityBG } from '../../store/burger/burgerReducer';
-import { getOpacityBG } from '../../selectors/burgerSelectors';
+import { getOpacityBG } from '../../store/burger/selectors';
 import cn from "classnames";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useRef } from 'react';

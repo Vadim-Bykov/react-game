@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { finishGame } from '../../store/main/mainReducer';
 import style from './Autoplay.module.scss';
 import PropTypes from "prop-types";
-import { getCountPairs } from '../../selectors/mainSelectors';
+import { getCountPairs } from '../../store/main/selectors';
 import { playGame } from '../../store/autoplay/middleware';
 import { toggleIsMenuActive } from '../../store/burger/burgerReducer';
 

@@ -1,4 +1,4 @@
-import initializeDeck from '../utils/deck';
+import initializeDeck from '../utils/getDeck';
 import { resetAutoplayState } from '../autoplay/actions';
 import { setGameTime, setTrueAttempt, setFalseAttempt, statsResetState } from '../stats/statsReducer';
 import { getInitialState } from '../utils/getInitialState';
@@ -175,7 +175,6 @@ const resetFlippedCards = (dispatch) => {
 export const finishGame = (countPairs) => (dispatch) => {
   dispatch(resetState(countPairs));
   setTimeout(dispatch(showAllCards()));
-  // dispatch(showAllCards());
   dispatch(statsResetState(false));
   dispatch(resetAutoplayState())
 };

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { finishGame } from '../../store/main/mainReducer';
 import style from './ChangeSize.module.scss';
 import PropTypes from "prop-types";
-import { getCountPairs } from '../../selectors/mainSelectors';
+import { getCountPairs } from '../../store/main/selectors';
 import cn from "classnames";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useRef } from 'react';

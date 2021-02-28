@@ -1,6 +1,6 @@
 import './Card.scss';
 import PropTypes from "prop-types";
-import back from '../../assets/img/logo192.png';
+import back from '../../assets/img/react.svg';
 import { useHotkeys } from "react-hotkeys-hook";
 import { useEffect, useRef } from 'react';
 

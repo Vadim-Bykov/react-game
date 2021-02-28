@@ -111,7 +111,7 @@ export const updateGameTime = (minutes, seconds) => (dispatch) => {
   
 };
 
-function timer(minutes, seconds) {
+const timer = (minutes, seconds) => {
   seconds++;
   if (seconds === 60) {
     seconds = 0;
