@@ -20,7 +20,7 @@ const MainComponent = () => {
       <Route path='/home' render={Main} />
       <Route path='/statistic' render={WithSuspense(StatsPageContainer)} />
       <Route path='/login' render={() => <Login />} />
-      <Route path='*' render={() => <h1>404 NOT FOUND</h1>} />
+      <Footer />
     </>
   );
 };
@@ -32,7 +32,6 @@ function App() {
     <Provider store={store}>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <MainComponentContainer />
-        <Footer />
       </BrowserRouter>
     </Provider>
   );
