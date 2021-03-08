@@ -16,8 +16,8 @@ const MainComponent = () => {
   return (
     <>
       <HeaderContainer />
-      <Route exact path='/' render={() => <Redirect to='/home' />} />
-      <Route path='/home' render={Main} />
+      {/* <Route exact path='/' render={() => <Redirect to='/home' />} /> */}
+      <Route exact path='/' render={Main} />
       <Route path='/statistic' render={WithSuspense(StatsPageContainer)} />
       <Route path='/login' render={() => <Login />} />
       <Footer />

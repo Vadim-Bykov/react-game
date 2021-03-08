@@ -9,7 +9,7 @@ import { ReduxLoginForm } from './LoginForm';
 
 const Login = ({ isAuth, setAuthData }) => {
    
-   if (isAuth) return <Redirect to='home' />
+   if (isAuth) return <Redirect to='/' />
 
    const onSubmitForm = (formData) => {
       console.log(formData);

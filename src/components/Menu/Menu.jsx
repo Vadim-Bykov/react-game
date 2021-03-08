@@ -38,7 +38,7 @@ const Menu = (props) => {
             </div>
 
             <nav className={style.nav}>
-               <NavLink activeClassName={style.active} to='/home'>Home page</NavLink>
+               <NavLink activeClassName={style.active} exact to='/'>Home page</NavLink>
                <NavLink activeClassName={style.active} to='/statistic'>Statistic page</NavLink>
             </nav>
 
