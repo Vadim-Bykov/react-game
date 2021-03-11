@@ -1,0 +1,36 @@
+.cardsBgBlock{
+  display: grid;
+  grid-row-gap: 10px;
+}
+
+.btnBlock{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button{
+    margin-bottom: 5px;
+  }
+}
+
+.opacityBlock{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// .red{
+//   color: rgba(194, 41, 41, 0.9);
+// }
+
+// .blue{
+//   color: blue;
+// }
+
+// .green{
+//   color: green;
+// }
+
+// .none{
+//   outline: 1px solid gray;
+// }
